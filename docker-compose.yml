@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - NODE_ENV=development
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CORS_ORIGIN=http://localhost:3000,http://localhost:4000
+      - MAX_FILE_SIZE_MB=10
+      - DEFAULT_BATCH_SIZE=20
+    volumes:
+      - /usr/src/app/node_modules
+      - ./backend/src:/usr/src/app/src
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+    depends_on:
+      - backend
+    volumes:
+      - /usr/src/app/node_modules
+      - ./frontend/src:/usr/src/app/src
