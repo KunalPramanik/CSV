@@ -7,7 +7,7 @@ export const logger = pino({
   level: env.NODE_ENV === 'test' ? 'silent' : 'info',
   transport: !isProduction
     ? {
-        target: 'pino-pretty',
+        target: 'pino',
         options: {
           colorize: true,
           ignore: 'pid,hostname',
