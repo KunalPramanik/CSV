@@ -5,6 +5,7 @@ node_modules/
 
 # Next.js build output
 /frontend/.next/
+/backend/dist/
 
 # Environment files (sensitive keys)
 .env

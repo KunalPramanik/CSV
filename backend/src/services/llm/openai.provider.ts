@@ -10,6 +10,14 @@ export class OpenAIProvider implements ILLMProvider {
 
   constructor() {
     const apiKey = env.OPENAI_API_KEY;
+    if (!apiKey) {
+      logger.warn('OPENAI_API_KEY is not defined. AI mapping operations will fail until configured.');
+      this.isGroq = false;
+      this.model = 'gpt-4o-mini';
+      this.openai = null as any;
+      return;
+    }
+    
     // Auto-detect Groq keys which typically start with 'gsk_'
     this.isGroq = apiKey.startsWith('gsk_');
     
@@ -33,6 +41,9 @@ export class OpenAIProvider implements ILLMProvider {
   }
 
   async mapBatch(rows: Record<string, any>[], systemPrompt: string): Promise<Record<string, any>[]> {
+    if (!this.openai) {
+      throw new Error('LLM Provider is not configured (missing OPENAI_API_KEY). Please add your API key to the environment variables.');
+    }
     logger.info({ rowCount: rows.length, model: this.model }, 'Sending batch to LLM');
     
     // Groq supports JSON mode (json_object) but not OpenAI's strict json_schema format.

@@ -2,11 +2,11 @@
   "name": "groweasy-csv-importer-backend",
   "version": "1.0.0",
   "description": "Enterprise-grade AI-powered CRM CSV Importer Backend",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src/**/*.ts"

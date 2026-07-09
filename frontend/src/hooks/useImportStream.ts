@@ -14,7 +14,11 @@ export function useImportStream() {
     const formData = new FormData();
     formData.append('file', file);
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    if (apiUrl && !apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
+      apiUrl = `https://${apiUrl}`;
+    }
+
 
     try {
       const response = await fetch(`${apiUrl}/api/import`, {
