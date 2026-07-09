@@ -17,7 +17,7 @@ import {
 export function LeadDashboard() {
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState('');
-  let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+  let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://csv-backend-eight.vercel.app';
   if (apiUrl && !apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
     apiUrl = `https://${apiUrl}`;
   }

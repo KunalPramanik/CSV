@@ -14,7 +14,7 @@ export function useImportStream() {
     const formData = new FormData();
     formData.append('file', file);
 
-    let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://csv-backend-eight.vercel.app';
     if (apiUrl && !apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
       apiUrl = `https://${apiUrl}`;
     }

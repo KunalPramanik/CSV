@@ -6,7 +6,10 @@ export const corsOptions: CorsOptions = {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    const allowedOrigins = env.CORS_ORIGIN.split(',').map(o => o.trim());
+    const allowedOrigins = [
+      ...env.CORS_ORIGIN.split(',').map(o => o.trim()),
+      'https://csv-chi-three.vercel.app'
+    ];
     if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
       callback(null, true);
     } else {
