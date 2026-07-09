@@ -10,6 +10,9 @@ import apiRouter from './routes/api.router.js';
 
 const app = express();
 
+// Trust reverse proxy (Vercel, Cloudflare, etc.) for rate limiter IP extraction
+app.set('trust proxy', 1);
+
 // Set security headers
 app.use(helmet());
 
